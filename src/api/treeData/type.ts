@@ -12,4 +12,5 @@ export type DataTreeResponseType = WithId<{
     sex:null| string
     dateOfBirth:null| string
     spouse:null| DataTreeResponseType
+    isOpen: boolean
 }>
