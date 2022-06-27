@@ -39,7 +39,6 @@ function App() {
             setState(data)
         })()
     }, [])
-    console.log(state)
     return <>
         <div className="body genealogy-body genealogy-scroll">
             <div className="genealogy-tree">
