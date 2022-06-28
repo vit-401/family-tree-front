@@ -16,8 +16,8 @@ function TablePerson() {
     const dispatch = useAppDispatch()
 
 
-    const {dataState} = useSelector<AppRootStateType, InitialStateTreeType>(state => state.tree)
-
+    let {dataState} = useSelector<AppRootStateType, InitialStateTreeType>(state => state.tree)
+    dataState = dataState.map( (node,index)=>({...node,index:index +1 }))
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [filterText, setFilterText] = useState("");
 
@@ -47,12 +47,15 @@ function TablePerson() {
         {
             title: <div style={{fontWeight: "bold"}}>id</div>,
             width: 60,
-            dataIndex: '_id',
-            key: '_id',
+            dataIndex: 'index',
+            key: 'index',
             fixed: 'left',
             defaultSortOrder: 'ascend',
             sorter: (a: any, b: any) => {
-                return a._id - b._id
+                return a -b
+            },
+            render: (text: any, record: any) => {
+                return text
             },
         },
 
@@ -128,7 +131,6 @@ function TablePerson() {
                         pageSizeOptions: ["5", "10", "20", "50", "100"],
                         defaultPageSize: 5,
                     }}
-                    scroll={{ x: 100 }}
 
             />
         </div>
