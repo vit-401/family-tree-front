@@ -1,6 +1,7 @@
 import React from "react";
 import {DataTreeResponseType, WithChildrenType} from "../../api/treeData/type";
 import style from "./Node.module.css"
+import {NavLink} from "react-router-dom";
 
 type NodeComponentPropsType = {
     children?: React.ReactNode
@@ -13,7 +14,7 @@ export function NewNode(props?: NodeComponentPropsType): JSX.Element {
     return <> {
         props?.node?.map(node => {
             return <li key={node._id + ""}>
-                <a>
+                <NavLink to={`edit-person/${node._id}`}>
                     <div className={style["member-view-box"]}>
                         <div className={style["member-image"]}>
                             <img src={dumbUserURI}
@@ -23,7 +24,7 @@ export function NewNode(props?: NodeComponentPropsType): JSX.Element {
                             </div>
                         </div>
                     </div>
-                </a>
+                </NavLink>
                 {node.children.length ? (<ul><NewNode node={node.children}/></ul>) : null}
 
             </li>

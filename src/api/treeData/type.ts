@@ -1,4 +1,3 @@
-import {ObjectId, WithId} from 'mongodb'
 // type ResponseDataType = {
 //     data:
 //         status:
@@ -9,19 +8,19 @@ export type WithChildrenType<T = {}> = T & { children: WithChildrenType<DataTree
 export type TreeCollectionType = {
     firstName: string,
     lastName: string,
-    parentId: ObjectId | null,
-    childrenId: ObjectId | null
+    parentId: string | null,
+    childrenId: string | null
     sex:null| string
     dateOfBirth:null| string
     spouse:null| DataTreeResponseType
 
 }
-
+export type WithId<T> = T & {_id: string}
 export type DataTreeResponseType = WithId<{
     firstName: string,
     lastName: string,
-    parentId: ObjectId | null,
-    childrenId: ObjectId | null
+    parentId: string | null,
+    childrenId: string | null
     sex:null| string
     dateOfBirth:null| string
     spouse:null| DataTreeResponseType

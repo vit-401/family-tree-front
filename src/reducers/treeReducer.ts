@@ -4,21 +4,20 @@ import {handleServerAppError, handleServerNetworkError} from "../utils/error-uti
 import {DataTreeResponseType, TreeCollectionType, WithChildrenType} from "../api/treeData/type";
 import {convertPlainArrToNested} from "../utils/convertPlainArrToNested";
 import {treeDataAPI} from "../api/treeData/tree-data-api";
-import {ObjectId} from "mongodb";
 
-export type InitialStateType = {
+export type InitialStateTreeType = {
     tree: WithChildrenType<DataTreeResponseType>[]
     dataState: DataTreeResponseType[]
     personFind: null | DataTreeResponseType
 }
 
-const initialState: InitialStateType = {
+const initialState: InitialStateTreeType = {
     tree: [],
     dataState: [],
     personFind: null
 }
 
-export const treeReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
+export const treeReducer = (state: InitialStateTreeType = initialState, action: ActionsType): InitialStateTreeType => {
     switch (action.type) {
         case 'GET-TREE': {
             const treeData = convertPlainArrToNested(action.tree, "_id", "parentId", null)
@@ -52,14 +51,14 @@ export const treeReducer = (state: InitialStateType = initialState, action: Acti
 }
 
 
-export const updatePersonAC = (id: ObjectId, data: TreeCollectionType) => ({
+export const updatePersonAC = (id: string, data: TreeCollectionType) => ({
     type: 'UPDATE-PERSON',
     data,
     id
 } as const)
 export const postPersonAC = (data: DataTreeResponseType) => ({type: 'POST-PERSON', data} as const)
-export const getPersonAC = (person: DataTreeResponseType) => ({type: 'GET-PERSON', person} as const)
-export const deletePersonAC = (id: ObjectId) => ({type: 'DELETE-PERSON', id} as const)
+export const getPersonAC = (person: DataTreeResponseType|null) => ({type: 'GET-PERSON', person} as const)
+export const deletePersonAC = (id: string) => ({type: 'DELETE-PERSON', id} as const)
 
 export const getTreeAC = (tree: DataTreeResponseType[]) => ({type: 'GET-TREE', tree} as const)
 
@@ -86,7 +85,7 @@ export const postPersonTC = (person: TreeCollectionType) => (dispatch: Dispatch<
     dispatch(setAppStatusAC('loading'))
     return treeDataAPI.addPerson(person)
         .then((res) => {
-            if (res.status === 200) {
+            if (res.status === 201) {
                 dispatch(postPersonAC(res.data));
                 dispatch(setAppStatusAC('succeeded'))
                 return true
@@ -100,7 +99,7 @@ export const postPersonTC = (person: TreeCollectionType) => (dispatch: Dispatch<
         })
 }
 
-export const updatePersonTC = (id: ObjectId, data: TreeCollectionType) => (dispatch: Dispatch<ActionsType>) => {
+export const updatePersonTC = (id: string, data: TreeCollectionType) => (dispatch: Dispatch<ActionsType>) => {
     dispatch(setAppStatusAC('loading'))
     return treeDataAPI.updatePerson(id, data)
         .then((res) => {
@@ -117,13 +116,13 @@ export const updatePersonTC = (id: ObjectId, data: TreeCollectionType) => (dispa
             return false
         })
 }
-export const getPersonTC = (id: ObjectId) => (dispatch: Dispatch<ActionsType>) => {
+export const getPersonTC = (id: string) => (dispatch: Dispatch<ActionsType>) => {
     dispatch(setAppStatusAC('loading'))
     return treeDataAPI.getPerson(id)
         .then((res) => {
             if (res.status === 200) {
                 dispatch(getPersonAC(res.data));
-                dispatch(setAppStatusAC('succeeded'))
+                dispatch(setAppStatusAC('idle'))
                 return true
             } else {
                 handleServerAppError(res.data, dispatch)
@@ -134,7 +133,7 @@ export const getPersonTC = (id: ObjectId) => (dispatch: Dispatch<ActionsType>) =
             return false
         })
 }
-export const deletePersonTC = (id: ObjectId) => (dispatch: Dispatch<ActionsType>) => {
+export const deletePersonTC = (id: string) => (dispatch: Dispatch<ActionsType>) => {
     dispatch(setAppStatusAC('loading'))
     return treeDataAPI.deletePerson(id)
         .then((res) => {

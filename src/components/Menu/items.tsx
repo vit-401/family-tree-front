@@ -1,4 +1,4 @@
-import {MenuProps} from "antd";
+import {Button, MenuProps} from "antd";
 import {AppstoreOutlined, MailOutlined, SettingOutlined} from "@ant-design/icons/lib";
 import React from "react";
 
@@ -49,6 +49,14 @@ export const items: MenuProps['items'] = [
                 ],
             },
         ],
+    },
+    {
+        label: (
+            <Button type="link" size={"large"}>
+                Add Person
+            </Button>
+        ),
+        key: 'alipay',
     },
     // {
     //     label: (

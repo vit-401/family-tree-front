@@ -21,7 +21,8 @@ function Home() {
     }, [])
     useLayoutEffect(() => {
         const elem = document.getElementById("body")
-        elem && elem.scrollBy({left: (elem.offsetWidth / (Math.sqrt(elem.offsetWidth / 2) / 2)), top: 0})
+        // elem && elem.scrollBy({left: 0, top: 0})
+        // elem && elem.scrollBy({left: (elem.offsetWidth / (Math.sqrt(elem.offsetWidth / 2) / 2)), top: 0})
     }, [dataTree])
     return <>
         <MenuApp/>

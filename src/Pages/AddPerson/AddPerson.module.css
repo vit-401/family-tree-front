@@ -1,0 +1,8 @@
+.formWrap{
+    min-height: 500px;
+}
+.container{
+    overflow: hidden;
+    width: 495px;
+    margin: 44px 50px;
+}

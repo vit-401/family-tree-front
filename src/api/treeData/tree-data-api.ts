@@ -1,6 +1,5 @@
 import axios from "../axiosHelper";
 import {DataTreeResponseType, TreeCollectionType} from "./type";
-import {ObjectId, WithId} from 'mongodb'
 
 
 export const treeDataAPI = {
@@ -11,13 +10,13 @@ export const treeDataAPI = {
     async addPerson(person:TreeCollectionType){
         return await axios.post<DataTreeResponseType>(`/tree`,person)
     },
-    async getPerson(id: ObjectId) {
+    async getPerson(id: string) {
         return await axios.get<DataTreeResponseType>(`/tree/${id}`)
     },
-    async updatePerson(id: ObjectId, data:TreeCollectionType) {
+    async updatePerson(id: string, data:TreeCollectionType) {
         return await axios.put<DataTreeResponseType>(`/tree/${id}`,data)
     },
-    async deletePerson(id: ObjectId) {
+    async deletePerson(id: string) {
         return await axios.delete(`/tree/${id}`)
     }
 }
