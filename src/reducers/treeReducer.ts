@@ -39,7 +39,10 @@ export const treeReducer = (state: InitialStateTreeType = initialState, action: 
             return {...state, personFind: action.person}
         }
         case 'DELETE-PERSON': {
-            const updatedState: DataTreeResponseType[] = state.dataState.filter(node => node._id !== action.id)
+            const updatedState: DataTreeResponseType[] = state.dataState
+                .filter(node => node._id !== action.id)
+                .map(node=>node.parentId ===action.id ? {...node, parentId: null}: node)
+
             const treeData = convertPlainArrToNested(updatedState, "_id", "parentId", null)
 
             return {...state, dataState: updatedState, tree: treeData}

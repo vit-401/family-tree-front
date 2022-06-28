@@ -7,7 +7,7 @@ declare global {
         }
     }
 }
-const target = window.env?.API_DOMAIN_ADDR || "http://localhost:5000"
+const target = window.env?.API_DOMAIN_ADDR || "https://family-trees-pp.herokuapp.com"
 
 axios.interceptors.request.use(async (request) => {
 
