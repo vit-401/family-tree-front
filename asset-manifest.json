@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/family-tree-front/static/css/main.9a7aafa8.css",
+    "main.js": "/family-tree-front/static/js/main.25673b95.js",
+    "static/js/787.6f235648.chunk.js": "/family-tree-front/static/js/787.6f235648.chunk.js",
+    "index.html": "/family-tree-front/index.html",
+    "main.9a7aafa8.css.map": "/family-tree-front/static/css/main.9a7aafa8.css.map",
+    "main.25673b95.js.map": "/family-tree-front/static/js/main.25673b95.js.map",
+    "787.6f235648.chunk.js.map": "/family-tree-front/static/js/787.6f235648.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9a7aafa8.css",
+    "static/js/main.25673b95.js"
+  ]
+}
