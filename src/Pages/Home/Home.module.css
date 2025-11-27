@@ -20,13 +20,14 @@
     position: absolute;
     top: 0;
     right: 50%;
-    border-top: 2px solid #ccc;
+    border-top: 3px solid #cbd5e1;
     width: 50%;
     height: 18px;
+    transition: all 0.3s ease;
 }
 .genealogy-tree li::after{
     right: auto; left: 50%;
-    border-left: 2px solid #ccc;
+    border-left: 3px solid #cbd5e1;
 }
 .genealogy-tree li:only-child::after, .genealogy-tree li:only-child::before {
     display: none;
@@ -38,60 +39,92 @@
     border: 0 none;
 }
 .genealogy-tree li:last-child::before{
-    border-right: 2px solid #ccc;
-    border-radius: 0 5px 0 0;
-    -webkit-border-radius: 0 5px 0 0;
-    -moz-border-radius: 0 5px 0 0;
+    border-right: 3px solid #cbd5e1;
+    border-radius: 0 8px 0 0;
 }
 .genealogy-tree li:first-child::after{
-    border-radius: 5px 0 0 0;
-    -webkit-border-radius: 5px 0 0 0;
-    -moz-border-radius: 5px 0 0 0;
+    border-radius: 8px 0 0 0;
 }
 .genealogy-tree ul ul::before{
     content: '';
     position: absolute; top: 0; left: 50%;
-    border-left: 2px solid #ccc;
+    border-left: 3px solid #cbd5e1;
     width: 0; height: 20px;
 }
 .genealogy-tree li a{
     cursor: pointer;
     text-decoration: none;
-    color: #666;
-    font-family: arial, verdana, tahoma;
-    font-size: 11px;
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
     display: inline-block;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .genealogy-tree li a:hover+ul li::after,
 .genealogy-tree li a:hover+ul li::before,
 .genealogy-tree li a:hover+ul::before,
 .genealogy-tree li a:hover+ul ul::before{
-    border-color:  #fbba00;
+    border-color: var(--primary-color);
 }
 
-/*--------------memeber-card-design----------*/
+/*--------------member-card-design----------*/
 .member-view-box{
-    padding:0px 20px;
+    padding: 0px 20px;
     text-align: center;
-    border-radius: 4px;
+    border-radius: 12px;
     position: relative;
+    transition: all 0.3s ease;
 }
+
+.member-view-box:hover {
+    transform: translateY(-4px);
+}
+
 .member-image{
-    width: 160px;
+    width: 180px;
     position: relative;
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    background: white;
+    border-radius: 16px;
+    padding: 24px 20px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid #f1f5f9;
 }
+
+.member-image:hover {
+    box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.15), 0 10px 10px -5px rgba(99, 102, 241, 0.1);
+    border-color: var(--primary-light);
+    transform: scale(1.02);
+}
+
 .member-image img{
-    width: 60px;
-    height: 60px;
-    border-radius: 6px;
-    background-color :#000;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     z-index: 1;
+    object-fit: cover;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+    border: 4px solid white;
+    transition: all 0.3s ease;
+}
+
+.member-image:hover img {
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+    transform: scale(1.05);
+}
+
+.member-image h3 {
+    margin-top: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.4;
 }

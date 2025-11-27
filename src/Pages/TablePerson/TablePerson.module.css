@@ -1,97 +1,134 @@
-
-.genealogy-tree{
-    display: inline-block;
+.tableContainer {
+    min-height: calc(100vh - 64px);
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    padding: 40px 32px;
 }
-.genealogy-tree ul {
-    padding-top: 20px;
-    position: relative;
-    padding-left: 0px;
+
+.searchContainer {
+    margin-bottom: 24px;
     display: flex;
-    justify-content: center;
-}
-.genealogy-tree li {
-    float: left; text-align: center;
-    list-style-type: none;
-    position: relative;
-    padding: 20px 5px 0 5px;
-}
-.genealogy-tree li::before, .genealogy-tree li::after{
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 50%;
-    border-top: 2px solid #ccc;
-    width: 50%;
-    height: 18px;
-}
-.genealogy-tree li::after{
-    right: auto; left: 50%;
-    border-left: 2px solid #ccc;
-}
-.genealogy-tree li:only-child::after, .genealogy-tree li:only-child::before {
-    display: none;
-}
-.genealogy-tree li:only-child{
-    padding-top: 0;
-}
-.genealogy-tree li:first-child::before, .genealogy-tree li:last-child::after{
-    border: 0 none;
-}
-.genealogy-tree li:last-child::before{
-    border-right: 2px solid #ccc;
-    border-radius: 0 5px 0 0;
-    -webkit-border-radius: 0 5px 0 0;
-    -moz-border-radius: 0 5px 0 0;
-}
-.genealogy-tree li:first-child::after{
-    border-radius: 5px 0 0 0;
-    -webkit-border-radius: 5px 0 0 0;
-    -moz-border-radius: 5px 0 0 0;
-}
-.genealogy-tree ul ul::before{
-    content: '';
-    position: absolute; top: 0; left: 50%;
-    border-left: 2px solid #ccc;
-    width: 0; height: 20px;
-}
-.genealogy-tree li a{
-    cursor: pointer;
-    text-decoration: none;
-    color: #666;
-    font-family: arial, verdana, tahoma;
-    font-size: 11px;
-    display: inline-block;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-}
-
-.genealogy-tree li a:hover+ul li::after,
-.genealogy-tree li a:hover+ul li::before,
-.genealogy-tree li a:hover+ul::before,
-.genealogy-tree li a:hover+ul ul::before{
-    border-color:  #fbba00;
-}
-
-/*--------------memeber-card-design----------*/
-.member-view-box{
-    padding:0px 20px;
-    text-align: center;
-    border-radius: 4px;
-    position: relative;
-}
-.member-image{
-    width: 160px;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+    gap: 16px;
     align-items: center;
 }
-.member-image img{
-    width: 60px;
-    height: 60px;
-    border-radius: 6px;
-    background-color :#000;
-    z-index: 1;
+
+.searchContainer :global(.ant-input-search) {
+    max-width: 400px;
+}
+
+.searchContainer :global(.ant-input-search input) {
+    border-radius: 8px;
+    border: 2px solid #e2e8f0;
+    padding: 10px 16px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+.searchContainer :global(.ant-input-search input:hover) {
+    border-color: var(--primary-light);
+}
+
+.searchContainer :global(.ant-input-search input:focus) {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.searchContainer :global(.ant-input-search-button) {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    border: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.searchContainer :global(.ant-input-search-button:hover) {
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+}
+
+.tableWrapper {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tableWrapper :global(.ant-table) {
+    font-family: 'Inter', sans-serif;
+}
+
+.tableWrapper :global(.ant-table-thead > tr > th) {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 14px;
+    border-bottom: 2px solid #e2e8f0;
+    padding: 16px;
+}
+
+.tableWrapper :global(.ant-table-tbody > tr) {
+    transition: all 0.3s ease;
+}
+
+.tableWrapper :global(.ant-table-tbody > tr:hover) {
+    background: #f8fafc;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.tableWrapper :global(.ant-table-tbody > tr > td) {
+    padding: 16px;
+    font-size: 14px;
+    color: var(--text-primary);
+}
+
+.actionLink {
+    color: var(--primary-color);
+    font-weight: 500;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.actionLink:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+.deleteAction {
+    color: #ef4444;
+}
+
+.deleteAction:hover {
+    color: #dc2626;
+}
+
+.tableWrapper :global(.ant-pagination) {
+    margin-top: 24px;
+}
+
+.tableWrapper :global(.ant-pagination-item) {
+    border-radius: 8px;
+    border: 2px solid #e2e8f0;
+    transition: all 0.3s ease;
+}
+
+.tableWrapper :global(.ant-pagination-item:hover) {
+    border-color: var(--primary-color);
+}
+
+.tableWrapper :global(.ant-pagination-item-active) {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    border-color: transparent;
+}
+
+.tableWrapper :global(.ant-pagination-item-active a) {
+    color: white;
 }

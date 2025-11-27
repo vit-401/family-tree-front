@@ -11,6 +11,7 @@ const routes: RoutesTypes = [
     {path: '/add-person', Component: AddPerson},
     {path: '/edit-person/:id', Component: AddPerson},
     {path: '/table', Component: TablePerson},
+    {path: '/tree/:personId', Component: Home},
     {path: '/', Component: Home},
 
 ]

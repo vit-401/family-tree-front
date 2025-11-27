@@ -1,9 +1,8 @@
 import {Menu, MenuProps} from "antd";
 import React, {useEffect, useState} from "react";
 import {AppstoreOutlined, TableOutlined, UserAddOutlined} from "@ant-design/icons/lib";
-import {NavLink, useLocation, useNavigate} from "react-router-dom";
-import {getPersonAC} from "../../reducers/treeReducer";
-import {useAppDispatch} from "../../hooks/reducer";
+import {NavLink, useLocation} from "react-router-dom";
+import styles from './Menu.module.css';
 
 
 export const MenuApp = () => {
@@ -51,11 +50,18 @@ export const MenuApp = () => {
     };
 
     useEffect(() => {
-        setCurrent(location.pathname)
+        // If viewing a specific person's tree, highlight Home menu item
+        if (location.pathname.startsWith('/tree/')) {
+            setCurrent('/');
+        } else {
+            setCurrent(location.pathname);
+        }
     }, [location.pathname])
 
     return <>
-        <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items}/>
-
+        <div className={styles.menuContainer}>
+            <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items}/>
+        </div>
+        <div style={{height: 64}} /> {/* Spacer for fixed menu */}
     </>
 }

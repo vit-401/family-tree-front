@@ -8,6 +8,7 @@ import {deletePersonTC, getTreeTC, InitialStateTreeType} from "../../reducers/tr
 import {DataTreeResponseType} from "../../api/treeData/type";
 import {useAppDispatch} from "../../hooks/reducer";
 import {ColumnsType} from "antd/lib/table/interface";
+import style from "./TablePerson.module.css";
 
 
 function TablePerson() {
@@ -34,8 +35,8 @@ function TablePerson() {
 
     useEffect(() => {
         dispatch(getTreeTC())
-
-    }, [dispatch])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
     let filteredList = useMemo(() => {
         let filtered: DataTreeResponseType[] = [...dataState];
         filtered = filterText && filterText.length ? filtered.filter(item => item.firstName.toLowerCase().includes(filterText.toLowerCase())) : filtered;
@@ -79,6 +80,33 @@ function TablePerson() {
                 return a.lastName && b.lastName && a.lastName.localeCompare(b.lastName)
             },
         },
+        {
+            title: <div style={{fontWeight: "bold"}}>Date of Birth</div>,
+            width: 150,
+            dataIndex: 'dateOfBirth',
+            key: 'dateOfBirth',
+            sorter: (a: any, b: any) => {
+                if (!a.dateOfBirth && !b.dateOfBirth) return 0;
+                if (!a.dateOfBirth) return 1;
+                if (!b.dateOfBirth) return -1;
+                return a.dateOfBirth.localeCompare(b.dateOfBirth);
+            },
+            render: (text: any) => text || '-',
+        },
+        {
+            title: <div style={{fontWeight: "bold"}}>Phone Number</div>,
+            width: 180,
+            dataIndex: 'phoneNumber',
+            key: 'phoneNumber',
+            render: (text: any) => text || '-',
+        },
+        {
+            title: <div style={{fontWeight: "bold"}}>Address</div>,
+            width: 250,
+            dataIndex: 'address',
+            key: 'address',
+            render: (text: any) => text || '-',
+        },
 
         {
             title: '',
@@ -89,21 +117,21 @@ function TablePerson() {
             render: (text: any, record: any) => {
                 return <Space size="middle" align={"end"}>
 
-                    <NavLink to={`/edit-person/${record._id}`}>
-                        <div style={{color: '#F05A2E', cursor: 'pointer'}}>
-                            Edit
-                        </div>
+                    <NavLink to={`/edit-person/${record._id}`} className={style.actionLink}>
+                        Edit
                     </NavLink>
 
                     <Popconfirm
                         placement="topRight"
-                        title="Are you sure you want to delete this user?"
+                        title="Are you sure you want to delete this person?"
                         onConfirm={() => deleteUser(record._id)}
                         onCancel={handleCancel}
+                        okText="Yes"
+                        cancelText="No"
                     >
-                        <div style={{color: '#F05A2E', cursor: 'pointer'}}>
+                        <span className={`${style.actionLink} ${style.deleteAction}`}>
                             Delete
-                        </div>
+                        </span>
                     </Popconfirm>
 
                 </Space>
@@ -113,26 +141,28 @@ function TablePerson() {
 
 
     return <>
-        <div >
-            <MenuApp/>
-
-            <div>
+        <MenuApp/>
+        <div className={style.tableContainer}>
+            <div className={style.searchContainer}>
                 <Input.Search
-                    placeholder="Search"
+                    placeholder="Search by first name..."
                     onChange={(e) => setFilterText(e.target.value)}
-                    style={{width: 200, marginRight: "15px"}}
+                    size="large"
+                    allowClear
                 />
-
             </div>
-            <Table  columns={columns}
+            <div className={style.tableWrapper}>
+                <Table  
+                    columns={columns}
                     dataSource={filteredList}
                     pagination={{
-                        showSizeChanger:true,
+                        showSizeChanger: true,
                         pageSizeOptions: ["5", "10", "20", "50", "100"],
-                        defaultPageSize: 5,
+                        defaultPageSize: 10,
+                        showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} people`,
                     }}
-
-            />
+                />
+            </div>
         </div>
     </>
 }

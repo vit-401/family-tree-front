@@ -12,7 +12,10 @@ export type TreeCollectionType = {
     childrenId: string | null
     sex:null| string
     dateOfBirth:null| string
-    spouse:null| DataTreeResponseType
+    spouseId:null| string
+    address:null| string
+    phoneNumber:null| string
+    parentType?: 'biological' | 'step' | 'adopted'
 
 }
 export type WithId<T> = T & {_id: string}
@@ -23,7 +26,10 @@ export type DataTreeResponseType = WithId<{
     childrenId: string | null
     sex:null| string
     dateOfBirth:null| string
-    spouse:null| DataTreeResponseType
+    spouseId:null| string
     isOpen: boolean
+    address:null| string
+    phoneNumber:null| string
+    parentType?: 'biological' | 'step' | 'adopted'
 }>
 

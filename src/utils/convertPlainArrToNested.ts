@@ -1,12 +1,13 @@
-export const convertPlainArrToNested = (arr: any[], idField: "_id", parentField: "parentId", rootParent: number | null) => {
-    // @ts-ignore
-    const tree = {[rootParent]: {children: []}};
+export const convertPlainArrToNested = (arr: any[], idField: "_id", parentField: "parentId", rootParent: string | number | null) => {
+    const tree: any = {[rootParent as any]: {children: []}};
 
-    // @ts-ignore
     arr.forEach(n => tree[n[idField]] = {...n, children: []});
-    // @ts-ignore
-    arr.forEach(n => tree[n[parentField]].children.push(tree[n[idField]]));
+    
+    arr.forEach(n => {
+        if (tree[n[parentField]]) {
+            tree[n[parentField]].children.push(tree[n[idField]]);
+        }
+    });
 
-    // @ts-ignore
-    return tree[rootParent].children;
+    return tree[rootParent as any].children;
 }
